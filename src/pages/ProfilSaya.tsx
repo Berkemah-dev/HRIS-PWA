@@ -46,44 +46,69 @@ export default function ProfilSaya() {
       .finally(() => setIsLoading(false));
   }, [user]);
 
-  if (isLoading) return <div className="p-8 flex justify-center"><span className="material-symbols-outlined animate-spin text-primary">sync</span></div>;
+  if (isLoading) {
+    return (
+      <div className="p-12 flex justify-center items-center flex-1">
+        <span className="material-symbols-outlined animate-spin text-primary text-3xl">sync</span>
+      </div>
+    );
+  }
+
   if (!profile) return null;
 
   return (
-    <div className="w-full flex flex-col h-full overflow-y-auto bg-surface">
-      <div className="flex flex-col w-full gap-stack-lg p-margin-mobile">
-        <div className="bg-surface-container rounded-2xl p-6 flex flex-col items-center shadow-sm relative overflow-hidden">
-          <div className="absolute top-0 inset-x-0 h-24 bg-primary/20" />
-          <div className="w-24 h-24 rounded-full bg-surface-container-high border-4 border-surface flex items-center justify-center text-primary shadow-sm relative z-10">
-            <span className="material-symbols-outlined text-[48px]">person</span>
-          </div>
-          <h2 className="text-headline-lg font-bold text-on-surface mt-4">{profile.name}</h2>
-          <span className="text-label-md text-on-surface-variant">{profile.role}</span>
-          <div className="mt-4 px-3 py-1 bg-primary-container text-on-primary-container rounded-full text-label-sm font-semibold">
-            {profile.status}
+    <div className="w-full flex flex-col gap-4 p-4">
+      {/* Profile Card Header */}
+      <div className="bg-white rounded-3xl p-6 flex flex-col items-center border border-slate-200/80 shadow-xs relative overflow-hidden">
+        <div className="absolute top-0 inset-x-0 h-20 bg-gradient-to-r from-primary to-primary-container opacity-90" />
+        
+        <div className="w-20 h-20 rounded-full bg-white border-4 border-white shadow-md flex items-center justify-center text-primary relative z-10 mt-2">
+          <div className="w-full h-full rounded-full bg-primary/10 flex items-center justify-center">
+            <span className="text-2xl font-bold text-primary">
+              {profile.name.slice(0, 1).toUpperCase()}
+            </span>
           </div>
         </div>
 
-        <div className="flex flex-col gap-3">
-          {[
-            ['email', 'Email', profile.email],
-            ['corporate_fare', 'Department', profile.department],
-            ['calendar_month', 'Tanggal Bergabung', profile.joinDate],
-          ].map(([icon, label, value]) => (
-            <div key={label} className="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant/30 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
-                <span className="material-symbols-outlined text-[20px]">{icon}</span>
-              </div>
-              <div className="flex flex-col min-w-0">
-                <span className="text-label-sm text-on-surface-variant">{label}</span>
-                <span className="text-body-md text-on-surface font-semibold truncate">{value}</span>
-              </div>
+        <h2 className="text-lg font-bold text-slate-900 mt-3">{profile.name}</h2>
+        <span className="text-xs text-slate-500 font-medium">{profile.role}</span>
+        
+        <div className="mt-2.5 px-3 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200/60 rounded-full text-[11px] font-semibold uppercase tracking-wider">
+          {profile.status}
+        </div>
+      </div>
+
+      {/* Info Details List */}
+      <div className="bg-white rounded-3xl p-4 border border-slate-200/80 shadow-xs flex flex-col gap-3">
+        <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider px-1">Informasi Karyawan</h3>
+        {[
+          ['mail', 'Email Perusahaan', profile.email],
+          ['corporate_fare', 'Departemen', profile.department],
+          ['calendar_month', 'Tanggal Bergabung', profile.joinDate],
+        ].map(([icon, label, value]) => (
+          <div key={label} className="p-3 rounded-2xl bg-slate-50 border border-slate-100 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-white text-primary flex items-center justify-center shadow-2xs border border-slate-200/60 shrink-0">
+              <span className="material-symbols-outlined text-[18px]">{icon}</span>
             </div>
-          ))}
-        </div>
+            <div className="flex flex-col min-w-0">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{label}</span>
+              <span className="text-xs text-slate-800 font-semibold truncate">{value}</span>
+            </div>
+          </div>
+        ))}
+      </div>
 
-        <button onClick={() => navigate('/change-password')} className="w-full bg-surface-container-high text-primary py-4 rounded-xl font-headline-md flex items-center justify-center gap-2 shadow-sm">
-          <span className="material-symbols-outlined">lock_reset</span> Ganti Password
+      {/* Action Buttons */}
+      <div className="flex flex-col gap-2.5">
+        <button 
+          onClick={() => navigate('/change-password')} 
+          className="w-full bg-white hover:bg-slate-50 active:scale-98 transition-all text-slate-700 py-3.5 px-4 rounded-2xl font-semibold text-xs flex items-center justify-between border border-slate-200/80 shadow-xs"
+        >
+          <div className="flex items-center gap-2.5">
+            <span className="material-symbols-outlined text-primary text-[20px]">lock_reset</span>
+            <span>Ubah Kata Sandi</span>
+          </div>
+          <span className="material-symbols-outlined text-slate-400 text-[18px]">chevron_right</span>
         </button>
 
         <button
@@ -92,11 +117,13 @@ export default function ProfilSaya() {
             logout();
             window.location.href = '/login';
           }}
-          className="w-full mt-4 bg-error-container text-on-error-container py-4 rounded-xl font-headline-md flex items-center justify-center gap-2 shadow-sm"
+          className="w-full bg-rose-50 hover:bg-rose-100/70 active:scale-98 transition-all text-rose-700 py-3.5 px-4 rounded-2xl font-semibold text-xs flex items-center justify-center gap-2 border border-rose-200/60"
         >
-          <span className="material-symbols-outlined">logout</span> Keluar
+          <span className="material-symbols-outlined text-[18px]">logout</span>
+          <span>Keluar dari Akun</span>
         </button>
       </div>
     </div>
   );
 }
+

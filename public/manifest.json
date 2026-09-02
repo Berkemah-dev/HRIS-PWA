@@ -1,0 +1,21 @@
+{
+  "short_name": "Timly",
+  "name": "Timly - HRIS Employee Self-Service",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
+      "src": "/app-logo.png",
+      "type": "image/png",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/beranda",
+  "background_color": "#ffffff",
+  "theme_color": "#006a61",
+  "display": "standalone",
+  "orientation": "portrait"
+}
