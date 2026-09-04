@@ -232,23 +232,6 @@ export default function Login() {
             </button>
           </form>
 
-          {/* Divider & RBAC Badge */}
-          <div className="border-t border-slate-100 pt-2 mt-0.5 flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded-full bg-[#006a61]/10 flex items-center justify-center flex-none text-[#006a61]">
-              <span className="material-symbols-outlined text-[15px]">verified_user</span>
-            </div>
-            <div className="flex flex-col text-left">
-              <span className="text-[11px] font-bold text-slate-800 leading-tight">Akun & RBAC</span>
-              <span className="text-[10px] text-slate-500">Scope Backend</span>
-            </div>
-          </div>
-
-          {/* Bottom Security Note */}
-          <div className="flex items-center justify-center gap-1 text-center text-[10.5px] text-slate-400">
-            <span className="material-symbols-outlined text-[12px]">lock</span>
-            <span>Keamanan data Anda adalah prioritas kami.</span>
-          </div>
-
         </section>
 
       </main>
